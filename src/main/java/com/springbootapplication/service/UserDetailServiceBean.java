@@ -39,4 +39,9 @@ public class UserDetailServiceBean implements UserDetailService {
 		userRepository.delete(id);
 	}
 
+	@Override
+	public User findOne(Long id) {
+		return userRepository.findOne(id);
+	}
+
 }
