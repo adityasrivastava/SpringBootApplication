@@ -3,6 +3,9 @@ package com.springbootapplication.service;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +29,7 @@ public class UserDetailServiceBean implements UserDetailService {
 	@Override
 	@Transactional(
 			propagation = Propagation.REQUIRED, readOnly=false)
+	@CachePut(value = "users", key="#result.id")
 	public User create(User user) {
 		return userRepository.save(user);
 	}
@@ -33,6 +37,7 @@ public class UserDetailServiceBean implements UserDetailService {
 	@Override
 	@Transactional(
 			propagation = Propagation.REQUIRED, readOnly=false)
+	@CachePut(value = "users", key="#user.id")
 	public User update(User user) {
 		
 		if(user.getId() == null){
@@ -45,13 +50,21 @@ public class UserDetailServiceBean implements UserDetailService {
 	@Override
 	@Transactional(
 			propagation = Propagation.REQUIRED, readOnly=false)
+	@CacheEvict(value="users", key="#id")
 	public void delete(Long id) {
 		userRepository.delete(id);
 	}
 
 	@Override
+	@Cacheable(value = "users", key = "#id")
 	public User findOne(Long id) {
 		return userRepository.findOne(id);
+	}
+	
+	@CacheEvict(
+			value = "users", allEntries = true)
+	public void evictCache(){
+		
 	}
 
 }
