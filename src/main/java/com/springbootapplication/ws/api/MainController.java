@@ -80,7 +80,7 @@ public class MainController {
 	
 	
 	@RequestMapping(
-            value = "/api/greetings/{id}/send",
+            value = "/api/users/{id}/send",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> sendGreeting(@PathVariable("id") Long id,
