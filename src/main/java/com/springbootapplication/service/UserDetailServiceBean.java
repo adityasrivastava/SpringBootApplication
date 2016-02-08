@@ -61,6 +61,7 @@ public class UserDetailServiceBean implements UserDetailService {
 		return userRepository.findOne(id);
 	}
 	
+	@Override
 	@CacheEvict(
 			value = "users", allEntries = true)
 	public void evictCache(){
