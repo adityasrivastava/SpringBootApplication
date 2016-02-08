@@ -61,4 +61,10 @@ public class MainController {
 		userDetailService.delete(id);
 		return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
 	}
+	
+	@RequestMapping(value = "/api/getUser/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> getUserDetails(@PathVariable("id") Long id){
+		User getUser = userDetailService.findOne(id);
+		return new ResponseEntity<User>(getUser, HttpStatus.OK);
+	}
 }

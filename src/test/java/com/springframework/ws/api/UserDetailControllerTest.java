@@ -86,8 +86,6 @@ public class UserDetailControllerTest extends AbstractControllerTest {
 		
 		int status = result.getResponse().getStatus();
 		
-		System.out.println(status);
-		
 		Assert.assertEquals("FAILDED: Delete not possible !!", 204, status);
 	}
 
