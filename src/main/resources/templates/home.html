@@ -281,11 +281,9 @@
 			$scope.clickToDeleteDetails = function(){
 				webPageFactory.removeDetails($scope.user_details_delete)
 				.success(function(response){
-					$scope.result = response;
-					$scope.user_details_response = angular.fromJson(response);
 
 					for(index in $scope.user_list){
-						if($scope.user_details_response.id === $scope.user_list[index].id){
+						if($scope.user_details_delete.id === $scope.user_list[index].id){
 							$scope.user_list.splice(index,1);
 						}
 					}
@@ -333,14 +331,7 @@
 
 			factory_service.removeDetails = function(user_obj){
 					console.log(user_obj);
-				return $http({
-
-					method: 'DELETE',
-					url: "http://localhost:8080/api/deleteUser"+"/"+user_obj.id,
-					data: user_obj
-
-				});
-				
+					return $http.delete("http://localhost:8080/api/deleteUser"+"/"+user_obj.id);
 			}
 
 

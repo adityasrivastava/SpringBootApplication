@@ -56,9 +56,8 @@ public class MainController {
 		return new ResponseEntity<User>(userDetailService.update(user), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/api/deleteUser/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/api/deleteUser/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.ALL_VALUE)
 	public ResponseEntity<User> deleteUser(@PathVariable("id") Long id) {
-		System.out.println(id);
 		userDetailService.delete(id);
 		return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
 	}
